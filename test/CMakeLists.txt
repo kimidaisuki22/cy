@@ -11,7 +11,9 @@ set(LIB_MIX  GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main cy)
 function(add_test_executable name)
     add_executable(${name} ${ARGN})
     target_link_libraries(${name} PRIVATE ${LIB_MIX})
-    add_test(${name} ${name})
+    # add_test(
+    #     NAME ${name}
+    #     COMMAND $<TARGET_FILE:${name}>)
 
     gtest_discover_tests(${name})
 endfunction()
