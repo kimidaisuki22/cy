@@ -1,7 +1,11 @@
 
-add_executable(fs_example src/fs_example.cpp)
 
-target_link_libraries(fs_example
+function(add_exe name)
+    add_executable(${name} src/${name}.cpp)
+    target_link_libraries(${name}
+        cy
+    )
+endfunction()
 
-cy
-)
+add_exe(fs_example)
+add_exe(memory_example)
