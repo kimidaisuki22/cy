@@ -7,6 +7,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
+#include <sys/types.h>
+#include <unistd.h>
+
 #endif
 #ifdef _WIN32
 size_t cy::proc::get_current_process_memory_usage() {
