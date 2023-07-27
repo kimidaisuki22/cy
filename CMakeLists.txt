@@ -4,9 +4,6 @@ project(cy VERSION 0.0.1)
 # set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 
-include(CTest)
-enable_testing()
-
 
 add_library(cy STATIC)
 
@@ -21,12 +18,18 @@ target_include_directories(cy PUBLIC
 
 option(cy_BUILD_EXAMPLE "build example for cy" ON)
 option(cy_INSTALL "install library cy" ON)
+option(cy_TESTING "build tests for cy" ON)
 
 if(${cy_BUILD_EXAMPLE})
     # add_executable(example example/example.cpp)
     # target_link_libraries(example cy)
     add_subdirectory(example)
 endif()
+
+if(${cy_TESTING})
+    add_subdirectory(test)
+endif()
+
 
 if(${cy_INSTALL})
 include(CPack)
