@@ -1,6 +1,5 @@
 project(cy_test)
 
-enable_testing()
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
