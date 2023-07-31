@@ -5,7 +5,7 @@
 #include <string_view>
 std::string cy::text::to_number_unit_SI(uint64_t number) {
   std::array<std::string_view, 5> SI_units = {
-      " ", " K", " M", " G", " T",
+      "", "K", "M", "G", "T",
   };
   constexpr uint64_t unit = 1024;
   std::array<uint64_t, 5> numbers;
