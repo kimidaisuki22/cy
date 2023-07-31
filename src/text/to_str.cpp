@@ -1,8 +1,26 @@
 #include "cy/text/to_str.h"
 #include <array>
+#include <sstream>
 #include <stdint.h>
 #include <string>
 #include <string_view>
+
+namespace {
+std::string format_double(double number, int precise) {
+  // std::string result = std::to_string(number);
+  // auto pos = result.find('.');
+  // if(pos != std::string::npos){
+  //   result = result.substr(0, pos + precise + 1);
+  // }
+  // return result;
+
+  std::ostringstream out;
+  out.precision(precise);
+  out << number;
+  return std::move(out).str();
+}
+} // namespace
+
 std::string cy::text::to_number_unit_SI(uint64_t number) {
   std::array<std::string_view, 5> SI_units = {
       "", "K", "M", "G", "T",
@@ -22,10 +40,10 @@ std::string cy::text::to_number_unit_SI(uint64_t number) {
     }
   }
   double result{};
-  if(level > 0){
-    result = numbers[level] + (numbers[level-1] / static_cast<double>(unit));
-  }else{
+  if (level > 0) {
+    result = numbers[level] + (numbers[level - 1] / static_cast<double>(unit));
+  } else {
     result = numbers[level];
   }
-  return std::to_string(result) + std::string(SI_units[level]);
+  return format_double(result,4) + std::string(SI_units[level]);
 }
