@@ -9,3 +9,4 @@ endfunction()
 
 add_exe(fs_example)
 add_exe(memory_example)
+add_exe(proc_example)
