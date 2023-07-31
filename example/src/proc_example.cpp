@@ -6,17 +6,21 @@
 int main() {
   std::cout << cy::proc::get_executable_path() << std::endl;
   {
+    using namespace cy::text;
+    using namespace cy::proc;
+
     auto command =
 #ifdef _WIN32
         "ipconfig";
 #else
         "ip a";
 #endif
-    auto lines = cy::text::to_lines(cy::proc::execute_command(command));
+    auto lines = to_lines(execute_command(command));
     std::sort(lines.begin(), lines.end());
     for (auto line : lines) {
-      if (cy::text::contains(line, "inet") || cy::text::contains(line, "IPv"))
-        std::cout << cy::text::trim(line) << std::endl;
+      if (contains(line, "inet") || contains(line, "IPv")) {
+        std::cout << trim(line) << std::endl;
+      }
     }
   }
 }
