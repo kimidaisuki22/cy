@@ -10,6 +10,7 @@ add_library(cy STATIC)
 target_sources(cy PRIVATE
 src/fs/extension.cpp
 src/proc/memory.cpp
+src/text/to_str.cpp
 )
 
 target_include_directories(cy PUBLIC
