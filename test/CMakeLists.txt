@@ -20,3 +20,4 @@ endfunction()
 
 add_test_executable(process src/memory_test.cpp)
 add_test_executable(filesystem src/fs_test.cpp)
+add_test_executable(text src/text_test.cpp)
