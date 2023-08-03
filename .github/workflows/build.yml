@@ -2,7 +2,7 @@ name: CI
 # Workflow file for windows
 on:
   push:
-    branches: [ ci ]
+    branches: [ ci, main ]
   pull_request:
     branches: [ main ]
 jobs:
@@ -86,4 +86,5 @@ jobs:
 
       - name: Test
         run: |
-          ctest .
+          cd build
+          ctest
