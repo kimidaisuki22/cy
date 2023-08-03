@@ -61,6 +61,18 @@ unsigned long long GetSystemMemoryUsage() {
 size_t cy::proc::get_current_process_memory_usage() {
   return GetProcessMemoryUsage(getpid());
 }
+#elif defined (__APPLE__)
+
+#include <mach/task.h>
+#include <mach/mach_init.h>
+
+size_t cy::proc::get_current_process_memory_usage() {
+    task_basic_info_data_t info;
+    mach_msg_type_number_t size = TASK_BASIC_INFO_COUNT;
+    task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &size);
+    return info.resident_size; // Return resident memory in Bytes
+}
+
 #else
 size_t cy::proc::get_current_process_memory_usage() {
   static_assert(false, "Not implemented");
