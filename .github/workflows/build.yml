@@ -21,7 +21,7 @@ jobs:
           - os: macos-latest
             triplet: x64-osx
     env:
-      VCPKG_ROOT: '${VCPKG_INSTALLATION_ROOT}'
+      VCPKG_ROOT: '$VCPKG_INSTALLATION_ROOT'
       CMAKE_GENERATOR: Ninja
     steps:
       - name: Checkout
