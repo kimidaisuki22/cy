@@ -21,13 +21,16 @@ jobs:
           - os: macos-latest
             triplet: x64-osx
     env:
-      VCPKG_ROOT: '$VCPKG_INSTALLATION_ROOT'
       CMAKE_GENERATOR: Ninja
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: recursive
+
+      - name: Fix VCPKG_ROOT
+        run: |
+          echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
 
 
       - name: Restore vcpkg and its artifacts.
