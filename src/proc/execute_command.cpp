@@ -39,7 +39,7 @@ void append_zero(Tiny_buffer &buffer) {
   *buffer.get_write_point() = 0;
   buffer.update_write_count(1);
 }
-#ifdef _WIN32
+#ifdef _MSC_VER
 const auto popen = _popen;
 const auto pclose = _pclose;
 #endif
