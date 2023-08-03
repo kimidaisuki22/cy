@@ -21,16 +21,14 @@ jobs:
           - os: macos-latest
             triplet: x64-osx
     env:
-      VCPKG_ROOT: '${{ github.workspace }}/vcpkg'
+      VCPKG_ROOT: '${VCPKG_INSTALLATION_ROOT}'
+      CMAKE_GENERATOR: Ninja
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - name: Get cmake
-        # Install latest CMake.
-        uses: lukka/get-cmake@latest
 
       - name: Restore vcpkg and its artifacts.
         uses: actions/cache@v2
@@ -52,22 +50,7 @@ jobs:
           key: |
             ${{ hashFiles( 'vcpkg.json' ) }}-${{ runner.os }}-cache-key-v1
 
-      - name: Get vcpkg(windows)
-        if: ${{ runner.os == 'Windows' && steps.vcpkg-cache.outputs.cache-hit != 'true' }}
-        run: |
-          cd ${{ github.workspace }}
-          mkdir build -force
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          .\bootstrap-vcpkg.bat
-      - name: Get vcpkg(Linux)
-        if: ${{ (runner.os == 'Linux' || runner.os == 'macos') && steps.vcpkg-cache.outputs.cache-hit != 'true' }}
-        run: |
-          cd ${{ github.workspace }}
-          mkdir -p build
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          ./bootstrap-vcpkg.sh
+
 
 
 
@@ -76,7 +59,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           cd build
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
 
 
       - name: Build Solution
