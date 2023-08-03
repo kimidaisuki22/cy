@@ -21,7 +21,8 @@ jobs:
           - os: macos-latest
             triplet: x64-osx
     env:
-      CMAKE_GENERATOR: Ninja
+      # CMAKE_GENERATOR: Ninja
+      EMPTY_ENV: "EMPTY"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,8 +30,13 @@ jobs:
           submodules: recursive
 
       - name: Fix VCPKG_ROOT
+        if: ${{ (runner.os == 'Linux' || runner.os == 'macos') }}
         run: |
           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+      - name: Fix VCPKG_ROOT(windows)
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          echo "VCPKG_ROOT=$ENV:VCPKG_INSTALLATION_ROOT" >> $ENV:GITHUB_ENV
 
 
       - name: Restore vcpkg and its artifacts.
@@ -61,7 +67,8 @@ jobs:
       - name: Running cmake
         run: |
           cd ${{ github.workspace }}
-          cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
+          cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
 
 
       - name: Build Solution
