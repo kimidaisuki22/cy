@@ -49,7 +49,7 @@ install(TARGETS cy
 install(EXPORT cy
     FILE cyConfig.cmake
     NAMESPACE cy::
-    DESTINATION share/cy
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cy
 )
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
