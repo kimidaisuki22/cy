@@ -79,6 +79,3 @@ std::filesystem::path cy::proc::get_executable_path() {
 }
 
 #endif // else not _WIN32
-void cy::proc::execute_self(){
-  execute_command(get_executable_path().string());
-}

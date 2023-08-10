@@ -43,6 +43,17 @@ void append_zero(Tiny_buffer &buffer) {
 const auto popen = _popen;
 const auto pclose = _pclose;
 #endif
+
+void exec(std::string command) {
+     std::system(
+      #if defined(_WIN32)
+      ("start " + command).c_str()
+      #else
+      (command + " &").c_str()
+      #endif
+     );
+}
+
 } // namespace
 
 namespace cy::proc {
@@ -70,5 +81,8 @@ std::string execute_command(std::string command) {
   append_zero(buffer);
 
   return buffer.pop_buffer();
+}
+void execute_self(){
+  exec(get_executable_path().string());
 }
 } // namespace cy::proc
