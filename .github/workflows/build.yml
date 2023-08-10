@@ -1,8 +1,8 @@
 name: CI
-# Workflow file for windows
+
 on:
   push:
-    branches: [ ci, main ]
+    branches: [ ci ]
   pull_request:
     branches: [ main ]
 jobs:
