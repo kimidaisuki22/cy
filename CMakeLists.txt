@@ -15,6 +15,7 @@ src/text/to_str.cpp
 src/proc/executable.cpp
 src/proc/execute_command.cpp
 src/text/process.cpp
+src/shell/shell.cpp
 )
 
 target_include_directories(cy PUBLIC
