@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21.0)
-project(cy VERSION 0.0.2)
+project(cy VERSION 0.0.3)
 
 # set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -15,6 +15,7 @@ src/text/to_str.cpp
 src/proc/executable.cpp
 src/proc/execute_command.cpp
 src/text/process.cpp
+src/shell/shell.cpp
 )
 
 target_include_directories(cy PUBLIC
