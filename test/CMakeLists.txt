@@ -2,7 +2,7 @@ project(cy_test)
 
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
-
+enable_testing()
 
 set(LIB_MIX  GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main cy)
 

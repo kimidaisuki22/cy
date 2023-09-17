@@ -34,6 +34,7 @@ endif()
 
 # use ctest build variable to check test.
 if(BUILD_TESTING)
+    enable_testing()
     add_subdirectory(test)
 endif()
 
