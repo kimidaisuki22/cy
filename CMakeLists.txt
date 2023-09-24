@@ -16,6 +16,9 @@ src/proc/executable.cpp
 src/proc/execute_command.cpp
 src/text/process.cpp
 src/shell/shell.cpp
+
+src/network/ip_inx.cpp
+src/network/ip_win32.cpp
 )
 
 target_include_directories(cy PUBLIC
