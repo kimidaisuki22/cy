@@ -23,7 +23,7 @@ src/network/ip_win32.cpp
 
 target_include_directories(cy PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 
 option(cy_BUILD_EXAMPLE "build example for cy" ON)
