@@ -1,3 +1,5 @@
+#include <_ctype.h>
+#include <cstddef>
 #include <cy/text/process.h>
 
 #include <sstream>
@@ -39,4 +41,20 @@ std::string cy::text::take_until(std::string str, char ch) {
 }
 bool cy::text::contains(std::string_view str, std::string_view substr) {
   return str.find(substr) != std::string_view::npos;
+}
+std::string cy::text::lower(std::string_view str) {
+  std::string result;
+  result.resize(str.size());
+  for(size_t i{};i<str.size();i++){
+    result[i] = tolower(str[i]);
+  }
+  return result;
+}
+std::string cy::text::upper(std::string_view str) {
+  std::string result;
+  result.resize(str.size());
+  for(size_t i{};i<str.size();i++){
+    result[i] = toupper(str[i]);
+  }
+  return result;
 }

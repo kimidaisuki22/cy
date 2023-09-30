@@ -12,5 +12,7 @@ std::string column(std::string str, int index);
 
 std::string take_until(std::string str, char ch);
 bool contains(std::string_view str, std::string_view substr);
+std::string upper(std::string_view str);
+std::string lower(std::string_view str);
 
 } // namespace cy::text
