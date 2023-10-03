@@ -7,7 +7,7 @@ class Stopwatch {
 public:
   Stopwatch() : base{Clock::now()} {}
   template <typename Unit = std::chrono::seconds, typename Format = double>
-  auto GetElapsedTime() const {
+  auto get_elapsed_time() const {
     auto elapsed = Clock::now() - base;
     using Target_unit = std::chrono::duration<Format, typename Unit::period>;
     return std::chrono::duration_cast<Target_unit>(elapsed).count();
