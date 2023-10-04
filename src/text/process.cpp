@@ -1,4 +1,3 @@
-#include <_ctype.h>
 #include <cstddef>
 #include <cy/text/process.h>
 
