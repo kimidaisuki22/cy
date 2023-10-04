@@ -13,7 +13,3 @@ TEST(Filesytem, replace_file_extension) {
 
     EXPECT_NE(cy::fs::change_extension("main.cpp", ".txt"), "main.cpp");
 }
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}

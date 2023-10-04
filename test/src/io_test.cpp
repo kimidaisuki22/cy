@@ -20,7 +20,3 @@ TEST(Io, read_write_buffer) {
     EXPECT_TRUE(memcmp(buf.data(), content.data(), content.size()) == 0);
   }
 }
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}

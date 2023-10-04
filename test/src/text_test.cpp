@@ -23,7 +23,3 @@ TEST(Text, upper) {
   EXPECT_STREQ(cy::text::upper("").c_str(), "");
   EXPECT_STREQ(cy::text::upper("1389").c_str(), "1389");
 }
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
