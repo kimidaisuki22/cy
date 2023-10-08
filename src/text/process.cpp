@@ -6,7 +6,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
-std::vector<std::string> cy::text::to_lines(std::string str) {
+std::vector<std::string> cy::text::to_lines_str(std::string str) {
   std::stringstream ss{std::move(str)};
   std::string line;
   std::vector<std::string> lines;
@@ -16,7 +16,7 @@ std::vector<std::string> cy::text::to_lines(std::string str) {
 
   return lines;
 }
-std::string cy::text::trim(std::string str) {
+std::string cy::text::trim_str(std::string str) {
   while (!str.empty() && std::isspace(str.back())) {
     str.pop_back();
   }
@@ -85,6 +85,15 @@ std::string_view cy::text::remove_end_new_line_char(std::string_view str) {
     } else {
       break;
     }
+  }
+  return str;
+}
+std::string_view cy::text::trim(std::string_view str) {
+  while (!str.empty() && std::isspace(str.back())) {
+    str.remove_suffix(1);
+  }
+  while (!str.empty() && std::isspace(str.front())) {
+    str.remove_prefix(1);
   }
   return str;
 }

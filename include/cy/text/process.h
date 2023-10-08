@@ -5,10 +5,11 @@
 
 namespace cy::text {
 
-std::vector<std::string> to_lines(std::string str);
+std::vector<std::string> to_lines_str(std::string str);
 std::vector<std::string_view> to_lines(std::string_view str);
 
-std::string trim(std::string str);
+std::string trim_str(std::string str);
+std::string_view trim(std::string_view str);
 std::string column(std::string str, int index);
 
 std::string take_until(std::string str, char ch);

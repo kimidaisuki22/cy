@@ -23,11 +23,10 @@ cy::text::breaker::empty_line_break(std::string_view text) {
         current = l;
       }
     }
-    if (current) {
-      results.push_back(current.value());
-    }
-    return results;
   }
 
+  if (current) {
+    results.push_back(current.value());
+  }
   return results;
 }
