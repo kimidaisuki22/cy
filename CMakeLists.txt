@@ -11,11 +11,14 @@ add_library(cy STATIC)
 target_sources(cy PRIVATE
 src/fs/extension.cpp
 src/proc/memory.cpp
-src/text/to_str.cpp
 src/proc/executable.cpp
 src/proc/execute_command.cpp
-src/text/process.cpp
 src/shell/shell.cpp
+
+src/text/process.cpp
+src/text/to_str.cpp
+src/text/breaker.cpp
+src/text/separator_cut.cpp
 
 src/network/ip_inx.cpp
 src/network/ip_win32.cpp
