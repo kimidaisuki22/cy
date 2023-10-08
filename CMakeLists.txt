@@ -33,6 +33,7 @@ target_include_directories(cy PUBLIC
 
 option(cy_BUILD_EXAMPLE "build example for cy" ON)
 option(cy_INSTALL "install library cy" ON)
+option(cy_BENCHMARK "install library cy" ON)
 
 if(${cy_BUILD_EXAMPLE})
     # add_executable(example example/example.cpp)
@@ -46,6 +47,9 @@ if(BUILD_TESTING)
     add_subdirectory(test)
 endif()
 
+if(${cy_BENCHMARK})
+    add_subdirectory(benchmark)
+endif()
 
 if(${cy_INSTALL})
 include(CPack)
