@@ -22,6 +22,8 @@ src/network/ip_win32.cpp
 
 src/io/read_to_buffer.cpp
 src/io/write_from_buffer.cpp
+
+src/memory/raw_arena.cpp
 )
 
 target_include_directories(cy PUBLIC
