@@ -60,4 +60,6 @@ void *Raw_arena::alloc(size_t buffer_size) {
     return handle_small_buffer(buffer_size);
   }
 }
+Raw_arena::Raw_arena(size_t block_size, size_t minimize_alloc_size)
+    : block_size_(block_size), minimize_alloc_size_(minimize_alloc_size) {}
 } // namespace cy::memory
