@@ -9,6 +9,7 @@ public:
   Raw_arena(size_t block_size, size_t minimize_alloc_size = 8);
   ~Raw_arena();
   void *alloc(size_t buffer_size);
+  void rewind();
 
 private:
   void *handle_large_buffer(size_t buffer_size);

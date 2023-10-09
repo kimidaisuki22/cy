@@ -44,7 +44,7 @@ void *Raw_arena::handle_small_buffer(size_t buffer_size) {
     }
   }
   create_new_buffer();
-  return task_buffer(ready_buffer_.size() - 1);
+  return task_buffer(ready_buffer_.size());
 }
 
 void *Raw_arena::handle_large_buffer(size_t buffer_size) {
@@ -54,7 +54,7 @@ void *Raw_arena::handle_large_buffer(size_t buffer_size) {
 }
 void *Raw_arena::alloc(size_t buffer_size) {
   buffer_size = calculate_padded_size(buffer_size, minimize_alloc_size_);
-  if (buffer_size >= this->minimize_alloc_size_) {
+  if (buffer_size >= this->block_size_) {
     return handle_large_buffer(buffer_size);
   } else {
     return handle_small_buffer(buffer_size);
@@ -62,4 +62,10 @@ void *Raw_arena::alloc(size_t buffer_size) {
 }
 Raw_arena::Raw_arena(size_t block_size, size_t minimize_alloc_size)
     : block_size_(block_size), minimize_alloc_size_(minimize_alloc_size) {}
+void Raw_arena::rewind() {
+  ready_buffer_.clear();
+  for (auto buf : buffers_to_free_) {
+    ready_buffer_.push_back(std::span<char>{(char *)buf, block_size_});
+  }
+}
 } // namespace cy::memory

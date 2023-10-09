@@ -6,7 +6,7 @@
 #include <vector>
 namespace {
 void raw_set(void *pt, size_t size) { memset(pt, 0xfa, size); }
-const int block_size = 11;
+const int block_size = 64;
 } // namespace
 static void BM_malloc(benchmark::State &state) {
   auto count = state.range(0);
@@ -37,6 +37,7 @@ static void BM_arena(benchmark::State &state) {
       auto pt = arena.alloc(block_size);
       raw_set(pt, block_size);
     }
+    arena.rewind();
   }
 }
 BENCHMARK(BM_arena)->RangeMultiplier(2)->Range(1, 1 << 16);
