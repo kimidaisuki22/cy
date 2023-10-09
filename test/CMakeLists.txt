@@ -14,7 +14,7 @@ function(add_test_executable name)
     #     NAME ${name}
     #     COMMAND $<TARGET_FILE:${name}>)
 
-    gtest_discover_tests(${name})
+    gtest_add_tests(TARGET ${name})
 endfunction()
 
 add_test_executable(process_test src/memory_test.cpp)
