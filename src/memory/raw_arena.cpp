@@ -1,6 +1,6 @@
 #include <cstddef>
 #include <cy/memory/raw_arena.h>
-#include <malloc/_malloc.h>
+#include <cstdlib>
 #include <span>
 namespace {
 constexpr size_t calculate_padded_size(size_t raw, size_t alignment) noexcept {
