@@ -2,6 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "cy",
   "version": "0.0.4",
+  "default-features": [
+    "benchmark",
+    "test"
+  ],
   "dependencies": [],
   "features": {
     "benchmark": {
