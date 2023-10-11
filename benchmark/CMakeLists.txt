@@ -1,4 +1,8 @@
-find_package(benchmark CONFIG REQUIRED)
+find_package(benchmark CONFIG)
+
+if(NOT benchmark_DIR)
+return()
+endif()
 
 function(add_bench target)
 

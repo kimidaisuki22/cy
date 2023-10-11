@@ -1,9 +1,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "cy",
-  "version": "0.0.1",
-  "dependencies": [
-    "gtest",
-    "benchmark"
-  ]
+  "version": "0.0.4",
+  "dependencies": [],
+  "features": {
+    "benchmark": {
+      "description": "build benchmarks",
+      "dependencies": [
+        "benchmark"
+      ]
+    },
+    "test": {
+      "description": "build tests",
+      "dependencies": [
+        "gtest"
+      ]
+    }
+  }
 }

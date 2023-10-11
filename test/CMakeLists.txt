@@ -1,6 +1,11 @@
 project(cy_test)
 
-find_package(GTest CONFIG REQUIRED)
+find_package(GTest CONFIG)
+
+if(NOT GTest_DIR)
+return()
+endif()
+
 include(GoogleTest)
 enable_testing()
 
