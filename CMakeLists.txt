@@ -11,7 +11,10 @@ add_library(cy STATIC)
 target_sources(cy PRIVATE
 src/fs/extension.cpp
 src/proc/memory.cpp
+
 src/text/to_str.cpp
+src/text/time.cpp
+
 src/proc/executable.cpp
 src/proc/execute_command.cpp
 src/text/process.cpp
