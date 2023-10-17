@@ -6,8 +6,13 @@ std::string format_time_with_format_string(const char *fmt,
                                            size_t buffer_size) {
   auto time_stamp = time(nullptr);
   tm time_tm{};
-  auto result = localtime_r(&time_stamp, &time_tm);
-  if (!result) {
+  bool ok{};
+#ifdef _MSVC_LANG
+  ok = localtime_s(&time_tm, &time_stamp) == 0;
+#else
+  ok = localtime_r(&time_stamp, &time_tm) != nullptr;
+#endif
+  if (!ok) {
     return "local time r failed";
   }
   std::string str_buffer;
@@ -23,8 +28,8 @@ std::string format_time_with_format_string(const char *fmt,
 }
 } // namespace
 std::string cy::text::local_date_str() {
-    return format_time_with_format_string("%Y-%m-%e", 32);
+  return format_time_with_format_string("%Y-%m-%e", 32);
 }
 std::string cy::text::local_hour_minute_seconds_str() {
-    return format_time_with_format_string("%H:%M:%S", 12);
+  return format_time_with_format_string("%H:%M:%S", 12);
 }
