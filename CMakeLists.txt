@@ -32,6 +32,8 @@ src/io/easy/file_read_write.cpp
 src/memory/raw_arena.cpp
 
 src/regex/extract_text.cpp
+
+src/experiment/mmap.cpp
 )
 
 target_include_directories(cy PUBLIC

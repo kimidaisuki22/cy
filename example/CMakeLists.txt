@@ -15,3 +15,5 @@ add_exe(network)
 add_exe(text_time)
 add_exe(fs_collect)
 add_exe(regex_extract)
+
+add_exe(mmap)
