@@ -2,6 +2,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <iostream>
 #elif __APPLE__
 #include <fcntl.h>
 #include <sys/mman.h>
