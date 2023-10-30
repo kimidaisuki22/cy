@@ -10,7 +10,7 @@
 void cy::shell::open(const std::filesystem::path &path) {
   std::string cmd;
   auto p = path;
-  cmd = OPEN_CMD "\"" + p.make_preferred().string() + "\"";
+  cmd = OPEN_CMD " \"" + p.make_preferred().string() + "\"";
   system(cmd.c_str());
 }
 void cy::shell::show(const std::filesystem::path &path) {
