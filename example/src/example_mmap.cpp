@@ -2,7 +2,7 @@
 #include <iostream>
 int main() {
   // Replace "test.txt" with the path to your file
-  using namespace cy::experiment;
+  using namespace cy::io;
   Mmap_file_reader mmapped_file(__FILE__);
 
   auto data = mmapped_file.data<char>();

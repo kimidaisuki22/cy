@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace cy::experiment {
+namespace cy::io {
 
 class Mmap_file_reader {
 public:
@@ -25,4 +25,4 @@ private:
   const void *data_;
   size_t size_;
 };
-} // namespace cy::experiment
+} // namespace cy::io
