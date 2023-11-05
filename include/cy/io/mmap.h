@@ -22,7 +22,7 @@ private:
 #elif __APPLE__ || __linux__
   int file_descriptor_;
 #endif
-  const void *data_;
+  void *data_;
   size_t size_;
 };
 } // namespace cy::io
