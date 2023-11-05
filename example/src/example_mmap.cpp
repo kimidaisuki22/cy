@@ -1,4 +1,4 @@
-#include <cy/experiment/mmap.h>
+#include <cy/io/mmap.h>
 #include <iostream>
 int main() {
   // Replace "test.txt" with the path to your file
