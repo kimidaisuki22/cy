@@ -14,7 +14,10 @@ src/fs/collect_files.cpp
 
 src/proc/memory.cpp
 
+src/text/process.cpp
 src/text/to_str.cpp
+src/text/breaker.cpp
+src/text/separator_cut.cpp
 src/text/time.cpp
 
 src/proc/executable.cpp
