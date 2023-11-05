@@ -2,16 +2,21 @@
 #include <cstdlib>
 #include <string>
 #ifndef _WIN32
+#ifdef __linux__
+#define  OPEN_CMD "xdg-open"
+#else
+#define  OPEN_CMD "open"
+#endif
 void cy::shell::open(const std::filesystem::path &path) {
   std::string cmd;
   auto p = path;
-  cmd = "open \"" + p.make_preferred().string() + "\"";
+  cmd = OPEN_CMD " \"" + p.make_preferred().string() + "\"";
   system(cmd.c_str());
 }
 void cy::shell::show(const std::filesystem::path &path) {
   std::string cmd;
   auto p = path;
-  cmd = "open \"" + p.make_preferred().parent_path().string() + "\"";
+  cmd = OPEN_CMD " \"" + p.make_preferred().parent_path().string() + "\"";
   system(cmd.c_str());
 }
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21.0)
-project(cy VERSION 0.0.3)
+project(cy VERSION 0.0.5)
 
 # set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -10,21 +10,33 @@ add_library(cy STATIC)
 
 target_sources(cy PRIVATE
 src/fs/extension.cpp
+src/fs/collect_files.cpp
+
 src/proc/memory.cpp
-src/proc/executable.cpp
-src/proc/execute_command.cpp
-src/shell/shell.cpp
 
 src/text/process.cpp
 src/text/to_str.cpp
 src/text/breaker.cpp
 src/text/separator_cut.cpp
+src/text/time.cpp
+
+src/proc/executable.cpp
+src/proc/execute_command.cpp
+src/text/process.cpp
+src/shell/shell.cpp
 
 src/network/ip_inx.cpp
 src/network/ip_win32.cpp
 
 src/io/read_to_buffer.cpp
 src/io/write_from_buffer.cpp
+src/io/easy/file_read_write.cpp
+
+src/memory/raw_arena.cpp
+
+src/regex/extract_text.cpp
+
+src/experiment/mmap.cpp
 )
 
 target_include_directories(cy PUBLIC
@@ -34,6 +46,7 @@ target_include_directories(cy PUBLIC
 
 option(cy_BUILD_EXAMPLE "build example for cy" ON)
 option(cy_INSTALL "install library cy" ON)
+option(cy_BENCHMARK "install library cy" ON)
 
 if(${cy_BUILD_EXAMPLE})
     # add_executable(example example/example.cpp)
@@ -47,6 +60,9 @@ if(BUILD_TESTING)
     add_subdirectory(test)
 endif()
 
+if(${cy_BENCHMARK})
+    add_subdirectory(benchmark)
+endif()
 
 if(${cy_INSTALL})
 include(CPack)
