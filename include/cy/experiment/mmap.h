@@ -3,13 +3,13 @@
 
 namespace cy::experiment {
 
-class Mmap_file {
+class Mmap_file_reader {
 public:
-  Mmap_file(const std::string &file_name);
-  ~Mmap_file();
+  Mmap_file_reader(const std::string &file_name);
+  ~Mmap_file_reader();
 
-  void *get_data() const;
-  size_t get_size() const;
+  const void *data() const;
+  size_t size() const;
 
 private:
 #ifdef _WIN32
@@ -19,7 +19,7 @@ private:
 #elif __APPLE__ || __linux__
   int file_descriptor_;
 #endif
-  void *data_;
+  const void *data_;
   size_t size_;
 };
 } // namespace cy::experiment

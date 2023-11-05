@@ -16,7 +16,7 @@
 #endif
 
 namespace cy::experiment {
-Mmap_file::Mmap_file(const std::string &file_name) : data_(nullptr), size_(0) {
+Mmap_file_reader::Mmap_file_reader(const std::string &file_name) : data_(nullptr), size_(0) {
 #ifdef _WIN32
   file_handle_ = CreateFileA(file_name.c_str(), GENERIC_READ, FILE_SHARE_READ,
                              NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -63,7 +63,7 @@ Mmap_file::Mmap_file(const std::string &file_name) : data_(nullptr), size_(0) {
 #endif
 }
 
-Mmap_file::~Mmap_file() {
+Mmap_file_reader::~Mmap_file_reader() {
 #ifdef _WIN32
   if (data_) {
     UnmapViewOfFile(data_);
@@ -84,8 +84,8 @@ Mmap_file::~Mmap_file() {
 #endif
 }
 
-void *Mmap_file::get_data() const { return data_; }
+const void *Mmap_file_reader::data() const { return data_; }
 
-size_t Mmap_file::get_size() const { return size_; }
+size_t Mmap_file_reader::size() const { return size_; }
 
 } // namespace cy::experiment
