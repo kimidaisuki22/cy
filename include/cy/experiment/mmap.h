@@ -9,6 +9,9 @@ public:
   ~Mmap_file_reader();
 
   const void *data() const;
+  template <typename T> const T *data() const {
+    return reinterpret_cast<const T *>(data());
+  }
   size_t size() const;
 
 private:

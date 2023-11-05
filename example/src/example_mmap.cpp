@@ -5,13 +5,13 @@ int main() {
   using namespace cy::experiment;
   Mmap_file_reader mmapped_file(__FILE__);
 
-  auto data = mmapped_file.data();
+  auto data = mmapped_file.data<char>();
   size_t size = mmapped_file.size();
 
   // Access the memory-mapped data as needed
   // e.g., print the content assuming it's a text file
   if (data && size > 0) {
-    std::cout.write(static_cast<const char *>(data), size);
+    std::cout.write(data, size);
     std::cout << std::endl;
   }
 
