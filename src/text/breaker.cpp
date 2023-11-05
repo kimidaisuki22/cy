@@ -1,6 +1,7 @@
 #include "cy/text/process.h"
 #include <cy/text/breaker.h>
 #include <string_view>
+#include <optional>
 #include <vector>
 std::vector<std::string_view>
 cy::text::breaker::empty_line_break(std::string_view text) {
