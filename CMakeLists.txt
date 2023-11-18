@@ -13,6 +13,7 @@ src/fs/extension.cpp
 src/fs/collect_files.cpp
 
 src/proc/memory.cpp
+src/proc/env.cpp
 
 src/text/process.cpp
 src/text/to_str.cpp
