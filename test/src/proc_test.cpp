@@ -15,10 +15,10 @@ TEST(Proc, env) {
 
   EXPECT_TRUE(!cy::proc::get_env(rand_envname).has_value());
   #ifdef _WIN32
-  _putenv_s(rand_envname.c_str(), rand_envname.c_str());
+  _putenv_s(rand_envname.c_str(), value.c_str());
   // SetEnvironmentVariableA(rand_envname.c_str(), value.c_str());
   #else
-  setenv(rand_envname.c_str(), rand_envname.c_str());
+  setenv(rand_envname.c_str(), value.c_str(), true);
   #endif
   EXPECT_TRUE(cy::proc::get_env(rand_envname).has_value());
   EXPECT_EQ(cy::proc::get_env(rand_envname).value(), value);
