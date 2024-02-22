@@ -10,6 +10,8 @@ std::vector<std::string_view> to_lines(std::string_view str);
 
 std::string trim_str(std::string str);
 std::string_view trim(std::string_view str);
+std::string_view l_trim(std::string_view str, char charater = ' ');
+std::string_view r_trim(std::string_view str, char charater = ' ');
 std::string column(std::string str, int index);
 
 std::string take_until(std::string str, char ch);

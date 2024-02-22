@@ -97,3 +97,15 @@ std::string_view cy::text::trim(std::string_view str) {
   }
   return str;
 }
+std::string_view cy::text::r_trim(std::string_view str, char charater) {
+  while(!str.empty() && str.back() == charater){
+          str.remove_suffix(1);
+  }
+  return str;
+}
+std::string_view cy::text::l_trim(std::string_view str, char charater) {
+  while(!str.empty() && str.front() == charater){
+          str.remove_suffix(1);
+  }
+  return str;
+}
