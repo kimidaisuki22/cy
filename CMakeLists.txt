@@ -3,6 +3,7 @@ project(cy VERSION 0.0.7)
 
 # set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
+option(cy_EXPERIMENT "install library cy" ON)
 
 include(CTest)
 
@@ -38,11 +39,15 @@ src/memory/raw_arena.cpp
 
 src/regex/extract_text.cpp
 
-src/experiment/empty.cpp
-
 src/chrono/convert.cpp
+)
+if(cy_EXPERIMENT)
+
+target_sources(cy PRIVATE
+src/experiment/empty.cpp
 src/experiment/fs/iterate_dir.cpp
 )
+endif()
 
 target_include_directories(cy PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
