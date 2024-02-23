@@ -19,7 +19,7 @@ function(add_test_executable name)
     #     NAME ${name}
     #     COMMAND $<TARGET_FILE:${name}>)
 
-    gtest_add_tests(TARGET SKIP_DEPENDENCY ${name}) # SKIP_DEPENDENCY will not add new test function to test list, but it prevent re-configure every modify for test source file.
+    gtest_add_tests(TARGET ${name} SKIP_DEPENDENCY) # SKIP_DEPENDENCY will not add new test function to test list, but it prevent re-configure every modify for test source file.
 
     # add_test(NAME ${name} COMMAND ${name}) // simple way but give less info.
 endfunction()
