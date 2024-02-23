@@ -41,6 +41,7 @@ src/regex/extract_text.cpp
 src/experiment/empty.cpp
 
 src/chrono/convert.cpp
+src/experiment/fs/iterate_dir.cpp
 )
 
 target_include_directories(cy PUBLIC
