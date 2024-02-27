@@ -7,6 +7,8 @@
 #include <utility>
 
 namespace cy::experiment::coroutine {
+// Task should not resumable, you don't need to call resume on them.
+// they just can be transfer to other executor.
 template <typename T> class Simple_task;
 template <typename T> class Simple_task_to_await {
 public:
@@ -26,7 +28,7 @@ private:
 
 template <typename T> auto await_to_callback_function(T &&callback) {
   struct To_callback {
-    T &output_ ;
+    T &output_;
     To_callback(T &e) : output_(e) {}
     bool await_ready() { return false; }
     void await_suspend(std::coroutine_handle<> handle) { output_(handle); }
