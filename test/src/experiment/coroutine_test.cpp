@@ -5,6 +5,7 @@
 #include <functional>
 #include <gtest/gtest.h>
 #include <numeric>
+#include <queue>
 #include <vector>
 
 cy::experiment::coroutine::Simple_generator<int> one_to_ten() {
@@ -41,6 +42,19 @@ cy::experiment::coroutine::Simple_task<int> count_up() {
   co_return result;
 }
 
+cy::experiment::coroutine::Simple_task<int>
+count_up_with_queue(std::queue<std::function<void()>> &dest, int id) {
+  auto gen = one_to_ten();
+  int result{};
+  for (auto i : gen) {
+    co_await cy::experiment::coroutine::await_to_callback_function(
+        [&](auto hd) { dest.push(hd); });
+    result += i;
+    std::cout << id << " add " << i << "\n";
+  }
+  co_return result;
+}
+
 TEST(Coroutine, simple_coroutine) {
   std::vector<int> a, b;
   for (int i = 0; i <= 10; i++) {
@@ -58,4 +72,12 @@ TEST(Coroutine, simple_coroutine) {
     sum += e;
   }
   EXPECT_EQ(task.getValue().value(), sum);
+  std::queue<std::function<void()>> dest;
+  auto job = count_up_with_queue(dest, 0);
+  auto job2 = count_up_with_queue(dest, 1);
+  while (!dest.empty()) {
+    std::cout << "Execute queue!\n";
+    dest.front()();
+    dest.pop();
+  }
 }

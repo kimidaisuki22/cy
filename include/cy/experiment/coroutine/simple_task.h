@@ -3,6 +3,7 @@
 #include <exception>
 #include <iostream>
 #include <optional>
+#include <type_traits>
 #include <utility>
 
 namespace cy::experiment::coroutine {
@@ -22,6 +23,17 @@ public:
 private:
   Simple_task<T> &task_;
 };
+
+template <typename T> auto await_to_callback_function(T &&callback) {
+  struct To_callback {
+    T &output_ ;
+    To_callback(T &e) : output_(e) {}
+    bool await_ready() { return false; }
+    void await_suspend(std::coroutine_handle<> handle) { output_(handle); }
+    void await_resume() {}
+  };
+  return To_callback{callback};
+}
 template <typename T> class Simple_task {
 public:
   struct promise_type;
