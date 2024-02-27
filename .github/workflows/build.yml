@@ -25,7 +25,7 @@ jobs:
       EMPTY_ENV: "EMPTY"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -40,7 +40,7 @@ jobs:
 
 
       - name: Restore vcpkg and its artifacts.
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: vcpkg-cache
         with:
           # The first path is where vcpkg generates artifacts while consuming the vcpkg.json manifest file.
