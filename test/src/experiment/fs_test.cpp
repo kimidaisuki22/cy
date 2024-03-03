@@ -18,7 +18,7 @@ TEST(Fs, recursive_iteration) {
   bool hint{};
   auto self = std::filesystem::path(__FILE__);
   for (auto file : cy::experiment::fs::iterate_files_in_dir_recursive(
-          self / "..")) {
+          self.parent_path())) {
    if(std::filesystem::absolute(file) == self){
     hint = true;
    }
