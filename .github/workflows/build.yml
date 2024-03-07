@@ -63,7 +63,6 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -Dcy_EXPERIMENT=OFF
-          cmake --build build
 
 
       - name: Build Solution
