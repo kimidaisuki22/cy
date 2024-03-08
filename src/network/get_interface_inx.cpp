@@ -1,5 +1,4 @@
 #ifndef _WIN32
-#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <cstdlib>
 #include <cstring>
@@ -7,24 +6,42 @@
 #include <ifaddrs.h>
 #include <iostream>
 #include <netinet/in.h>
+#include <sys/socket.h>
 #include <vector>
 
 #include "cy/network/interface.h"
 #include <vector>
 namespace cy::network {
 std::vector<Interface> get_interfaces() {
-    std::vector<Interface> interfaces;
+  std::vector<Interface> interfaces;
 
   struct ifaddrs *ifap;
   if (getifaddrs(&ifap) == -1) {
     std::cerr << "Error getting network interface information." << std::endl;
     return {};
   }
-
+  std::vector<int> family_set{};
+// On macos
+#ifdef __APPLE__
+  // AF_LINK; has too much device that don't have an IP address.
+  family_set.push_back(AF_INET);
+  family_set.push_back(AF_INET6);
+#else
+  family_set.push_back(AF_PACKET);
+#endif
+  auto has_flag = [&family_set](int flag) {
+    for (auto f : family_set) {
+      if (f == flag) {
+        return true;
+      }
+    }
+    return false;
+  };
   struct ifaddrs *current = ifap;
   while (current != nullptr) {
-    if (current->ifa_addr != nullptr && current->ifa_addr->sa_family == AF_PACKET) {
-       interfaces.push_back(Interface{current->ifa_name});
+    if (current->ifa_addr != nullptr &&
+        has_flag(current->ifa_addr->sa_family)) {
+      interfaces.push_back(Interface{current->ifa_name});
     }
     current = current->ifa_next;
   }
