@@ -44,9 +44,7 @@ std::vector<Interface> get_interfaces() {
   while (current != nullptr) {
     if (current->ifa_addr != nullptr &&
         has_flag(current->ifa_addr->sa_family)) {
-      interfaces.push_back(
-          Interface{current->ifa_name,
-                    Address{socket_addr_to_string(current->ifa_addr)}});
+      interfaces.push_back(Interface{current->ifa_name});
     }
     current = current->ifa_next;
   }

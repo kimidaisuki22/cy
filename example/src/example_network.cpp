@@ -10,6 +10,6 @@ int main() {
   }
 
   for (auto interface : cy::network::get_interfaces()) {
-    std::cout << interface.get_name() << "\n";
+    std::cout << interface.get_name() << ": " << "\n";
   }
 }
