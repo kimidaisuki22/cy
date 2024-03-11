@@ -1,3 +1,4 @@
+#include "cy/network/find_ip.h"
 #include "cy/network/get_interface.h"
 #include <algorithm>
 #include <cy/network/ip.h>
@@ -10,6 +11,8 @@ int main() {
   }
 
   for (auto interface : cy::network::get_interfaces()) {
-    std::cout << interface.get_name() << ": " << "\n";
+    std::cout << interface.get_name() << ": "
+              << cy::network::find_ipv4_for_interface(interface).to_string()
+              << "\n";
   }
 }

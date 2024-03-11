@@ -11,7 +11,8 @@ find_address_family_for_interface(const cy::network::Interface &interface,
 
   for (auto current : cy::network::iterate_interface()) {
     if (current->ifa_addr != nullptr &&
-        current->ifa_addr->sa_family == family_flag) {
+        current->ifa_addr->sa_family == family_flag &&
+        current->ifa_name == interface.get_name()) {
       return cy::network::Address{
           cy::network::socket_addr_to_string(current->ifa_addr)};
     }
