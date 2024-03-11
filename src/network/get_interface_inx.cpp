@@ -14,15 +14,11 @@
 #include "cy/network/interface.h"
 #include "detail_include/sockaddr_to_string_inx.h"
 #include <vector>
+#include "detail_include/ifaddrs_iterate.h"
 namespace cy::network {
 std::vector<Interface> get_interfaces() {
   std::vector<Interface> interfaces;
 
-  struct ifaddrs *ifap;
-  if (getifaddrs(&ifap) == -1) {
-    std::cerr << "Error getting network interface information." << std::endl;
-    return {};
-  }
   std::vector<int> family_set{};
 // On macos
 #ifdef __APPLE__
@@ -40,8 +36,8 @@ std::vector<Interface> get_interfaces() {
     }
     return false;
   };
-  struct ifaddrs *current = ifap;
-  while (current != nullptr) {
+
+  for (auto current : iterate_interface()) {
     if (current->ifa_addr != nullptr &&
         has_flag(current->ifa_addr->sa_family)) {
       interfaces.push_back(Interface{current->ifa_name});
@@ -49,7 +45,6 @@ std::vector<Interface> get_interfaces() {
     current = current->ifa_next;
   }
 
-  freeifaddrs(ifap);
   return interfaces;
 }
 

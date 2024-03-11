@@ -31,6 +31,8 @@ src/network/ip_inx.cpp
 src/network/ip_win32.cpp
 src/network/get_interface_inx.cpp
 src/network/sockaddr_to_string_inx.cpp
+src/network/find_ip.cpp
+src/network/ifaddrs_iterate.cpp
 
 src/io/read_to_buffer.cpp
 src/io/write_from_buffer.cpp
