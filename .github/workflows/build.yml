@@ -18,7 +18,7 @@ jobs:
             triplet: x64-windows
           - os: ubuntu-latest
             triplet: x64-linux
-          - os: macos-14
+          - os: macos-13 # macos-14 don't have vcpkg now
             triplet: x64-osx
     env:
       # CMAKE_GENERATOR: Ninja
