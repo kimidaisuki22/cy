@@ -1,3 +1,4 @@
+#include "cy/network/address.h"
 #ifndef _WIN32
 #include <arpa/inet.h>
 #include <cstdlib>
@@ -6,10 +7,12 @@
 #include <ifaddrs.h>
 #include <iostream>
 #include <netinet/in.h>
+#include <string>
 #include <sys/socket.h>
 #include <vector>
 
 #include "cy/network/interface.h"
+#include "detail_include/sockaddr_to_string_inx.h"
 #include <vector>
 namespace cy::network {
 std::vector<Interface> get_interfaces() {
@@ -41,7 +44,9 @@ std::vector<Interface> get_interfaces() {
   while (current != nullptr) {
     if (current->ifa_addr != nullptr &&
         has_flag(current->ifa_addr->sa_family)) {
-      interfaces.push_back(Interface{current->ifa_name});
+      interfaces.push_back(
+          Interface{current->ifa_name,
+                    Address{socket_addr_to_string(current->ifa_addr)}});
     }
     current = current->ifa_next;
   }
