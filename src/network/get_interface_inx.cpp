@@ -12,9 +12,9 @@
 #include <vector>
 
 #include "cy/network/interface.h"
+#include "detail_include/ifaddrs_iterate.h"
 #include "detail_include/sockaddr_to_string_inx.h"
 #include <vector>
-#include "detail_include/ifaddrs_iterate.h"
 namespace cy::network {
 std::vector<Interface> get_interfaces() {
   std::vector<Interface> interfaces;
@@ -40,7 +40,10 @@ std::vector<Interface> get_interfaces() {
   for (auto current : iterate_interface()) {
     if (current->ifa_addr != nullptr &&
         has_flag(current->ifa_addr->sa_family)) {
-      interfaces.push_back(Interface{current->ifa_name});
+      if (interfaces.empty() ||
+          (interfaces.back().get_name() != current->ifa_name)) {
+        interfaces.push_back(Interface{current->ifa_name});
+      }
     }
     current = current->ifa_next;
   }
