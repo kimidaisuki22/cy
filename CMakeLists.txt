@@ -40,6 +40,8 @@ src/memory/raw_arena.cpp
 src/regex/extract_text.cpp
 
 src/chrono/convert.cpp
+
+src/iteration/round_robin.cpp
 )
 if(cy_EXPERIMENT)
 
