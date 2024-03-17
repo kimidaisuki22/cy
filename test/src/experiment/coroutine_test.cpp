@@ -3,6 +3,7 @@
 #include "cy/experiment/coroutine/scheduler_pack.h"
 #include "cy/experiment/coroutine/simple_generator.h"
 #include "cy/experiment/coroutine/simple_task.h"
+#include "cy/experiment/coroutine/stream_generator.h"
 
 #include <atomic>
 #include <chrono>
@@ -108,4 +109,22 @@ TEST(Coroutine, board_cast) {
 
   EXPECT_EQ(running, 0);
   EXPECT_EQ(output, target_output);
+}
+
+TEST(Coroutine, stream) {
+  const int task_count = 20;
+
+  auto f =
+      [](int mux) -> cy::experiment::coroutine::Stream_generator<int, int> {
+    int input = 0;
+    int output = 0;
+    while ((input = co_yield output)) {
+      output = input * mux;
+    }
+  };
+  int mux_value = 42;
+  auto mux = f(mux_value);
+  for (int i = 1; i < task_count; i++) {
+    EXPECT_EQ(i * mux_value, mux(i));
+  }
 }
