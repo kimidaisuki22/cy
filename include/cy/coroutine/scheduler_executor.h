@@ -4,6 +4,7 @@
 #include <cy/coroutine/scheduler_pack.h>
 #include <cy/coroutine/switch_scheduler.h>
 #include <vector>
+#include <thread>
 
 namespace cy::coroutine {
 class Scheduler_executor {
