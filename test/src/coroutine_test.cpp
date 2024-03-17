@@ -7,6 +7,7 @@
 
 #include <atomic>
 #include <chrono>
+#include <format>
 #include <gtest/gtest.h>
 #include <thread>
 #include <vector>
@@ -18,8 +19,9 @@ cy::coroutine::Simple_generator<int> one_to_ten() {
 }
 
 cy::coroutine::Simple_task<int>
-f_sleep(cy::coroutine::Scheduler_pack &schedulers, int second) {
+f_sleep(cy::coroutine::Scheduler_pack &schedulers,int tid, int second) {
   co_await schedulers.await_io();
+  std::cout << std::format("Sleep {} {}\n",tid,second);
   std::this_thread::sleep_for(std::chrono::seconds{second});
   co_return second;
 }
@@ -32,7 +34,7 @@ f_task(cy::coroutine::Scheduler_pack &schedulers, int index, int &output,
 
   co_await schedulers.await_main();
 
-  std::cout << "IO : " << index << "\n";
+  // std::cout << "IO : " << index << "\n";
   co_await schedulers.await_compute();
 
   for (int i = 0; i < 10; i++) {
@@ -41,7 +43,7 @@ f_task(cy::coroutine::Scheduler_pack &schedulers, int index, int &output,
     memset(ch.data(), 0, ch.size());
   }
 
-  int time = co_await f_sleep(schedulers, index / 10);
+  int time = co_await f_sleep(schedulers, index, index / 10);
 
   co_await schedulers.await_main();
   std::cout << "Done " << index << " for " << time << " seconds\n";

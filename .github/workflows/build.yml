@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '*' ]
   pull_request:
     branches: [ main ]
 jobs:
@@ -12,14 +12,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, ] # windows-latest, macos-latest ]
+
         include:
           - os: windows-latest
             triplet: x64-windows
-          - os: ubuntu-latest
-            triplet: x64-linux
-          - os: macos-13 # Use newer version for macos, https://github.com/actions/runner-images?tab=readme-ov-file#available-images
-            triplet: x64-osx
+
     env:
       # CMAKE_GENERATOR: Ninja
       EMPTY_ENV: "EMPTY"
