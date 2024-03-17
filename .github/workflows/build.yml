@@ -18,7 +18,7 @@ jobs:
             triplet: x64-windows
           - os: ubuntu-latest
             triplet: x64-linux
-          - os: macos-latest
+          - os: macos-13 # Use newer version for macos, https://github.com/actions/runner-images?tab=readme-ov-file#available-images
             triplet: x64-osx
     env:
       # CMAKE_GENERATOR: Ninja
