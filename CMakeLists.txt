@@ -42,6 +42,8 @@ src/regex/extract_text.cpp
 src/chrono/convert.cpp
 
 src/iteration/round_robin.cpp
+
+src/concurrency/stop_flag.cpp
 )
 if(cy_EXPERIMENT)
 
