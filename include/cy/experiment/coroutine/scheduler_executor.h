@@ -18,12 +18,15 @@ public:
   void wait_all();
 
   void spawn_scheduler_to_thread(Coroutine_scheduler &scheduler);
+  int get_working_count() const;
+
 private:
   static void scheduler_thread_task(Coroutine_scheduler &scheduler,
-                                    concurrency::Stop_flag &stop_flag);
+                                    concurrency::Stop_flag &stop_flag,std::atomic_int& working_count);
   Scheduler_pack *pack_{};
   std::vector<std::thread> working_threads_;
   concurrency::Stop_flag stop_flag_{};
+  std::atomic_int working_count_{};
 };
 
 } // namespace cy::experiment::coroutine

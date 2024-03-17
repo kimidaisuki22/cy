@@ -30,11 +30,13 @@ void Scheduler_executor::wait_all() {
 }
 void Scheduler_executor::spawn_scheduler_to_thread(
     Coroutine_scheduler &scheduler) {
-  std::thread t([&] { scheduler_thread_task(scheduler, stop_flag_); });
+  std::thread t(
+      [&] { scheduler_thread_task(scheduler, stop_flag_, working_count_); });
   working_threads_.push_back(std::move(t));
 }
 void Scheduler_executor::scheduler_thread_task(
-    Coroutine_scheduler &scheduler, concurrency::Stop_flag &stop_flag) {
+    Coroutine_scheduler &scheduler, concurrency::Stop_flag &stop_flag,
+    std::atomic_int &working_count) {
   while (true) {
     scheduler.wait([&stop_flag] { return stop_flag.is_stopped(); });
     if (stop_flag.is_stopped()) {
@@ -42,11 +44,14 @@ void Scheduler_executor::scheduler_thread_task(
     }
 
     while (!scheduler.empty()) {
+      ++working_count;
       scheduler.pop().resume();
+      --working_count;
       if (stop_flag.is_stopped()) {
         break;
       }
     }
   }
 }
+int Scheduler_executor::get_working_count() const { return working_count_; }
 } // namespace cy::experiment::coroutine
