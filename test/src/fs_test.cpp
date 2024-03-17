@@ -34,5 +34,11 @@ TEST(Fs, recursive_iteration) {
     hint = true;
    }
   }
+  if (!hint) {
+    for (auto file :
+         cy::fs::iterate_files_in_dir_recursive(self.parent_path())) {
+      std::cout << std::filesystem::absolute(file).string() << "\n";
+    }
+  }
   EXPECT_TRUE(hint);
 }
