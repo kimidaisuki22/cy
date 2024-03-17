@@ -1,5 +1,5 @@
-#include <cy/experiment/coroutine/scheduler_executor.h>
-namespace cy::experiment::coroutine {
+#include <cy/coroutine/scheduler_executor.h>
+namespace cy::coroutine {
 
 Scheduler_executor::Scheduler_executor(Scheduler_pack &pack) : pack_{&pack} {
   for (auto &io : pack.io_threads_) {
@@ -54,4 +54,4 @@ void Scheduler_executor::scheduler_thread_task(
   }
 }
 int Scheduler_executor::get_working_count() const { return working_count_; }
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

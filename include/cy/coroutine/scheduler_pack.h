@@ -1,10 +1,10 @@
 #pragma once
-#include <cy/experiment/coroutine/coroutine_scheduler.h>
-#include <cy/experiment/coroutine/switch_scheduler.h>
+#include <cy/coroutine/coroutine_scheduler.h>
+#include <cy/coroutine/switch_scheduler.h>
 #include <cy/iteration/round_robin.h>
 #include <vector>
 
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 
 class Scheduler_pack {
 public:
@@ -26,4 +26,4 @@ public:
   iteration::Round_robin io_balance_;
   iteration::Round_robin compute_balance_;
 };
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

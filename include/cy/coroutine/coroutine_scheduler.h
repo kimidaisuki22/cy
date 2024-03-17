@@ -2,7 +2,7 @@
 #include <condition_variable>
 #include <coroutine>
 #include <deque>
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 class Coroutine_scheduler {
 public:
   using Handle = std::coroutine_handle<>;
@@ -23,4 +23,4 @@ private:
   std::mutex mutex_{};
   std::condition_variable wait_wake_up_{};
 };
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

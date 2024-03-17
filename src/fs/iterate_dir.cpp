@@ -1,19 +1,18 @@
 #include "cy/utils/local_RAII.h"
-#include <cy/experiment/fs/iterate_dir.h>
+#include <cy/fs/iterate_dir.h>
 #include <filesystem>
-cy::experiment::coroutine::Simple_generator<std::filesystem::directory_entry>
-cy::experiment::fs::iterate_files_in_dir_non_recursive(
-    std::filesystem::path path) {
+cy::coroutine::Simple_generator<std::filesystem::directory_entry>
+cy::fs::iterate_files_in_dir_non_recursive(std::filesystem::path path) {
   std::filesystem::directory_iterator iter{path}, end;
   while (iter != end) {
     co_yield *iter;
     ++iter;
   }
 }
-cy::experiment::coroutine::Simple_generator<std::filesystem::directory_entry>
-cy::experiment::fs::iterate_files_in_dir_recursive(std::filesystem::path path,
-                                                   size_t &&depth,
-                                                   bool &&jump_out_this_dir) {
+cy::coroutine::Simple_generator<std::filesystem::directory_entry>
+cy::fs::iterate_files_in_dir_recursive(std::filesystem::path path,
+                                       size_t &&depth,
+                                       bool &&jump_out_this_dir) {
   depth++;
   utils::Local_RAII decrease_depth{[&depth] { depth--; }};
   std::filesystem::directory_iterator iter{path}, end;

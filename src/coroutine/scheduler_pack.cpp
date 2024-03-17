@@ -1,5 +1,5 @@
-#include <cy/experiment/coroutine/scheduler_pack.h>
-namespace cy::experiment::coroutine {
+#include <cy/coroutine/scheduler_pack.h>
+namespace cy::coroutine {
 
 Scheduler_pack::Scheduler_pack(size_t io_count, size_t compute_count)
     : io_balance_{io_count}, compute_balance_{compute_count} {
@@ -13,4 +13,4 @@ Scheduler_pack::Scheduler_pack(size_t io_count, size_t compute_count)
     p = std::make_unique<Scheduler>();
   }
 }
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

@@ -3,7 +3,7 @@
 #include <exception>
 #include <utility>
 
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 
 template <typename T> class Simple_task {
 public:
@@ -54,4 +54,4 @@ public:
 private:
   handle_type coro;
 };
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

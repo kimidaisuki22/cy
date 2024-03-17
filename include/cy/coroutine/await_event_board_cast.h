@@ -3,7 +3,7 @@
 #include <mutex>
 #include <vector>
 
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 template <typename T> class Awaitable_event_board_cast {
 public:
   // return received count
@@ -50,4 +50,4 @@ private:
   std::vector<Waiting_handle> waitings_{};
   std::mutex mutex_{};
 };
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

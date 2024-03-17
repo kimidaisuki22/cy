@@ -1,5 +1,5 @@
-#include <cy/experiment/coroutine/coroutine_scheduler.h>
-namespace cy::experiment::coroutine {
+#include <cy/coroutine/coroutine_scheduler.h>
+namespace cy::coroutine {
 void Coroutine_scheduler::notify() { wait_wake_up_.notify_one(); }
 Coroutine_scheduler::Handle Coroutine_scheduler::pop() {
   Handle h;
@@ -18,4 +18,4 @@ void Coroutine_scheduler::add(Handle handle) {
   }
   wait_wake_up_.notify_one();
 }
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

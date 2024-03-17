@@ -1,9 +1,9 @@
-#include "cy/experiment/coroutine/await_event_board_cast.h"
-#include "cy/experiment/coroutine/scheduler_executor.h"
-#include "cy/experiment/coroutine/scheduler_pack.h"
-#include "cy/experiment/coroutine/simple_generator.h"
-#include "cy/experiment/coroutine/simple_task.h"
-#include "cy/experiment/coroutine/stream_generator.h"
+#include "cy/coroutine/await_event_board_cast.h"
+#include "cy/coroutine/scheduler_executor.h"
+#include "cy/coroutine/scheduler_pack.h"
+#include "cy/coroutine/simple_generator.h"
+#include "cy/coroutine/simple_task.h"
+#include "cy/coroutine/stream_generator.h"
 
 #include <atomic>
 #include <chrono>
@@ -11,22 +11,22 @@
 #include <thread>
 #include <vector>
 
-cy::experiment::coroutine::Simple_generator<int> one_to_ten() {
+cy::coroutine::Simple_generator<int> one_to_ten() {
   for (int i = 0; i <= 10; i++) {
     co_yield i;
   }
 }
 
-cy::experiment::coroutine::Simple_task<int>
-f_sleep(cy::experiment::coroutine::Scheduler_pack &schedulers, int second) {
+cy::coroutine::Simple_task<int>
+f_sleep(cy::coroutine::Scheduler_pack &schedulers, int second) {
   co_await schedulers.await_io();
   std::this_thread::sleep_for(std::chrono::seconds{second});
   co_return second;
 }
 
-cy::experiment::coroutine::Simple_task<int>
-f_task(cy::experiment::coroutine::Scheduler_pack &schedulers, int index,
-       int &output, int &count_down) {
+cy::coroutine::Simple_task<int>
+f_task(cy::coroutine::Scheduler_pack &schedulers, int index, int &output,
+       int &count_down) {
 
   co_await schedulers.await_io();
 
@@ -62,8 +62,8 @@ TEST(Coroutine, simple_coroutine) {
 }
 
 TEST(Coroutine, simple_task) {
-  cy::experiment::coroutine::Scheduler_pack schedulers{10, 10};
-  cy::experiment::coroutine::Scheduler_executor exe{schedulers};
+  cy::coroutine::Scheduler_pack schedulers{10, 10};
+  cy::coroutine::Scheduler_executor exe{schedulers};
   const int task_count = 20;
   std::atomic_int count_down{task_count};
   int running = task_count;
@@ -88,12 +88,10 @@ TEST(Coroutine, board_cast) {
   int running = task_count;
   int output = 0;
 
-  cy::experiment::coroutine::Awaitable_event_board_cast<int> number_provider;
+  cy::coroutine::Awaitable_event_board_cast<int> number_provider;
 
-  auto f =
-      [](cy::experiment::coroutine::Awaitable_event_board_cast<int> &number,
-         int &output,
-         int &count_down) -> cy::experiment::coroutine::Simple_task<int> {
+  auto f = [](cy::coroutine::Awaitable_event_board_cast<int> &number,
+              int &output, int &count_down) -> cy::coroutine::Simple_task<int> {
     auto n = co_await number.await();
     output += n * 2;
 
@@ -114,8 +112,7 @@ TEST(Coroutine, board_cast) {
 TEST(Coroutine, stream) {
   const int task_count = 20;
 
-  auto f =
-      [](int mux) -> cy::experiment::coroutine::Stream_generator<int, int> {
+  auto f = [](int mux) -> cy::coroutine::Stream_generator<int, int> {
     int input = 0;
     int output = 0;
     while ((input = co_yield output)) {

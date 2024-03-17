@@ -1,6 +1,6 @@
 #pragma once
-#include <cy/experiment/coroutine/coroutine_scheduler.h>
-namespace cy::experiment::coroutine {
+#include <cy/coroutine/coroutine_scheduler.h>
+namespace cy::coroutine {
 inline auto switch_to_scheduler(Coroutine_scheduler &scheduler) {
   struct awaitable {
     Coroutine_scheduler *scheduler_ptr_;
@@ -10,4 +10,4 @@ inline auto switch_to_scheduler(Coroutine_scheduler &scheduler) {
   };
   return awaitable{&scheduler};
 }
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

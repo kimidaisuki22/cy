@@ -1,12 +1,11 @@
 #pragma once
-#include <cy/experiment/coroutine/coroutine_scheduler.h>
-#include <cy/experiment/coroutine/scheduler_pack.h>
-#include <cy/experiment/coroutine/switch_scheduler.h>
 #include <cy/concurrency/stop_flag.h>
+#include <cy/coroutine/coroutine_scheduler.h>
+#include <cy/coroutine/scheduler_pack.h>
+#include <cy/coroutine/switch_scheduler.h>
 #include <vector>
 
-
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 class Scheduler_executor {
 public:
   Scheduler_executor(Scheduler_pack &pack);
@@ -22,11 +21,12 @@ public:
 
 private:
   static void scheduler_thread_task(Coroutine_scheduler &scheduler,
-                                    concurrency::Stop_flag &stop_flag,std::atomic_int& working_count);
+                                    concurrency::Stop_flag &stop_flag,
+                                    std::atomic_int &working_count);
   Scheduler_pack *pack_{};
   std::vector<std::thread> working_threads_;
   concurrency::Stop_flag stop_flag_{};
   std::atomic_int working_count_{};
 };
 
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

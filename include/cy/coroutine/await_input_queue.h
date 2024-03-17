@@ -1,8 +1,9 @@
 #pragma once
+#include <coroutine>
 #include <deque>
 #include <mutex>
-#include <coroutine>
-namespace cy::experiment::coroutine {
+
+namespace cy::coroutine {
 template <typename T> class Awaitable_input_queue {
 public:
   void push(T value) {
@@ -60,4 +61,4 @@ private:
   std::deque<T> values_{};
   std::mutex mutex_{};
 };
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine
