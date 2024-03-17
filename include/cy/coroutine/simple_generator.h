@@ -5,7 +5,7 @@
 #include <optional>
 #include <type_traits>
 #include <utility>
-namespace cy::experiment::coroutine {
+namespace cy::coroutine {
 template <typename T> class Simple_generator {
 public:
   struct promise_type;
@@ -71,4 +71,4 @@ private:
   handle_type coro;
 };
 
-} // namespace cy::experiment::coroutine
+} // namespace cy::coroutine

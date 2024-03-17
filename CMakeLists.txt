@@ -9,9 +9,13 @@ include(CTest)
 
 add_library(cy STATIC)
 
+# target_compile_options(cy PUBLIC -fsanitize=thread)
+# target_link_options(cy PUBLIC -fsanitize=thread)
+
 target_sources(cy PRIVATE
 src/fs/extension.cpp
 src/fs/collect_files.cpp
+src/fs/iterate_dir.cpp
 
 src/proc/memory.cpp
 src/proc/env.cpp
@@ -44,12 +48,16 @@ src/chrono/convert.cpp
 src/iteration/round_robin.cpp
 
 src/concurrency/stop_flag.cpp
+
+src/coroutine/coroutine_scheduler.cpp
+src/coroutine/scheduler_pack.cpp
+src/coroutine/scheduler_executor.cpp
 )
 if(cy_EXPERIMENT)
 
 target_sources(cy PRIVATE
 src/experiment/empty.cpp
-src/experiment/fs/iterate_dir.cpp
+
 )
 endif()
 
