@@ -52,6 +52,8 @@ src/experiment/empty.cpp
 src/experiment/fs/iterate_dir.cpp
 
 src/experiment/coroutine/coroutine_scheduler.cpp
+src/experiment/coroutine/scheduler_pack.cpp
+src/experiment/coroutine/scheduler_executor.cpp
 )
 endif()
 
