@@ -9,8 +9,6 @@ include(CTest)
 
 add_library(cy STATIC)
 
-target_compile_options(cy PUBLIC -fsanitize=address)
-target_link_options(cy PUBLIC -fsanitize=address)
 
 target_sources(cy PRIVATE
 src/fs/extension.cpp
