@@ -20,7 +20,7 @@ public:
 
 private:
   std::deque<Handle> handles_{};
-  std::mutex mutex_{};
+  mutable std::mutex mutex_{};
   std::condition_variable wait_wake_up_{};
 };
 } // namespace cy::coroutine

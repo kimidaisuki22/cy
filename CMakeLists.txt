@@ -9,6 +9,9 @@ include(CTest)
 
 add_library(cy STATIC)
 
+# target_compile_options(cy PUBLIC -fsanitize=thread)
+# target_link_options(cy PUBLIC -fsanitize=thread)
+
 target_sources(cy PRIVATE
 src/fs/extension.cpp
 src/fs/collect_files.cpp

@@ -10,12 +10,15 @@ Coroutine_scheduler::Handle Coroutine_scheduler::pop() {
   }
   return h;
 }
-bool Coroutine_scheduler::empty() const { return handles_.empty(); }
+bool Coroutine_scheduler::empty() const {
+  std::unique_lock lock{mutex_};
+  return handles_.empty();
+}
 void Coroutine_scheduler::add(Handle handle) {
   {
     std::unique_lock lock{mutex_};
     handles_.push_back(handle);
-  }
   wait_wake_up_.notify_one();
+  }
 }
 } // namespace cy::coroutine
