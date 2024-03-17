@@ -1,5 +1,4 @@
 #include "cy/experiment/coroutine/await_event_board_cast.h"
-#include "cy/experiment/coroutine/scheduler_check.h"
 #include "cy/experiment/coroutine/scheduler_executor.h"
 #include "cy/experiment/coroutine/scheduler_pack.h"
 #include "cy/experiment/coroutine/simple_generator.h"
