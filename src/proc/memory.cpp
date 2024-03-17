@@ -30,11 +30,12 @@ unsigned long long GetProcessMemoryUsage(int pid) {
         std::cerr << "Error: Could not open statm file for process " << pid << std::endl;
         return 0;
     }
+    int page_size = 4096;
 
     unsigned long long size, resident, shared, text, lib, data, dt;
     statm_file >> size >> resident >> shared >> text >> lib >> data >> dt;
 
-    return resident; // Return resident set size (RSS) in KB
+    return resident * page_size; // Return resident set size (RSS) in KB
 }
 // Function to get system-wide memory usage in KB
 unsigned long long GetSystemMemoryUsage() {
@@ -55,7 +56,7 @@ unsigned long long GetSystemMemoryUsage() {
         }
     }
 
-    return totalMemory; // Return total memory in KB
+    return totalMemory * 1024; // Return total memory in KB
 }
 }
 size_t cy::proc::get_current_process_memory_usage() {
