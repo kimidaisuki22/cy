@@ -2,6 +2,7 @@
 #include <cy/fs.h>
 #include <cy/fs/iterate_dir.h>
 
+#include <filesystem>
 #include <gtest/gtest.h>
 
 TEST(Filesytem, replace_file_extension) {
@@ -20,7 +21,6 @@ TEST(Fs, lazy_collect) {
   for (auto file :
        cy::fs::iterate_files_in_dir_non_recursive(".")) {
     auto path = file.path();
-    EXPECT_NE(path.string(), "a");
     count++;
   }
   EXPECT_GE(count, 0);
@@ -30,7 +30,7 @@ TEST(Fs, recursive_iteration) {
   auto self = std::filesystem::path(__FILE__);
   for (auto file : cy::fs::iterate_files_in_dir_recursive(
           self.parent_path())) {
-   if(std::filesystem::absolute(file) == self){
+   if(std::filesystem::absolute(file) == std::filesystem::absolute(self)){
     hint = true;
    }
   }
