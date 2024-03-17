@@ -1,3 +1,4 @@
+#include "cy/experiment/coroutine/await_event_board_cast.h"
 #include "cy/experiment/coroutine/scheduler_check.h"
 #include "cy/experiment/coroutine/scheduler_executor.h"
 #include "cy/experiment/coroutine/scheduler_pack.h"
@@ -80,4 +81,32 @@ TEST(Coroutine, simple_task) {
   exe.stop();
   exe.wait_all();
   EXPECT_EQ(output, 20);
+}
+
+TEST(Coroutine, board_cast) {
+  const int task_count = 20;
+  int running = task_count;
+  int output = 0;
+
+  cy::experiment::coroutine::Awaitable_event_board_cast<int> number_provider;
+
+  auto f =
+      [](cy::experiment::coroutine::Awaitable_event_board_cast<int> &number,
+         int &output,
+         int &count_down) -> cy::experiment::coroutine::Simple_task<int> {
+    auto n = co_await number.await();
+    output += n * 2;
+
+    count_down--;
+    co_return 0;
+  };
+  for (int i = 0; i < task_count; i++) {
+    f(number_provider, output, running);
+  }
+  const int input = 42;
+  const int target_output = input * task_count * 2;
+  EXPECT_EQ(number_provider.send_event(input), task_count);
+
+  EXPECT_EQ(running, 0);
+  EXPECT_EQ(output, target_output);
 }
