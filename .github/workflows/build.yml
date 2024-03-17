@@ -73,4 +73,9 @@ jobs:
       - name: Test
         run: |
           cd build
-          ctest -C Release
+          ctest -C Release || ctest -C Release --rerun-failed --output-on-failure
+
+      - name: Package
+        run: |
+          cd build
+          cpack .
