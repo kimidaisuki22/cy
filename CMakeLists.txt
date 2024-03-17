@@ -50,6 +50,8 @@ if(cy_EXPERIMENT)
 target_sources(cy PRIVATE
 src/experiment/empty.cpp
 src/experiment/fs/iterate_dir.cpp
+
+src/experiment/coroutine/coroutine_scheduler.cpp
 )
 endif()
 
