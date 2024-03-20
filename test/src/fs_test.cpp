@@ -1,6 +1,8 @@
 #include "cy/fs/extension.h"
 #include <cy/fs.h>
+#include <cy/fs/iterate_dir.h>
 
+#include <filesystem>
 #include <gtest/gtest.h>
 
 TEST(Filesytem, replace_file_extension) {
@@ -12,4 +14,31 @@ TEST(Filesytem, replace_file_extension) {
     EXPECT_EQ(cy::fs::change_extension(".config", "a.cpp"), ".config.cpp");
 
     EXPECT_NE(cy::fs::change_extension("main.cpp", ".txt"), "main.cpp");
+}
+
+TEST(Fs, lazy_collect) {
+  size_t count{};
+  for (auto file :
+       cy::fs::iterate_files_in_dir_non_recursive(".")) {
+    auto path = file.path();
+    count++;
+  }
+  EXPECT_GE(count, 0);
+}
+TEST(Fs, recursive_iteration) {
+  bool hint{};
+  auto self = std::filesystem::path(__FILE__);
+  for (auto file : cy::fs::iterate_files_in_dir_recursive(
+          self.parent_path())) {
+   if(std::filesystem::absolute(file) == std::filesystem::absolute(self)){
+    hint = true;
+   }
+  }
+  if (!hint) {
+    for (auto file :
+         cy::fs::iterate_files_in_dir_recursive(self.parent_path())) {
+      std::cout << std::filesystem::absolute(file).string() << "\n";
+    }
+  }
+  EXPECT_TRUE(hint);
 }
