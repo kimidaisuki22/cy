@@ -1,9 +1,9 @@
 #ifndef _WIN32
 #include "detail_include/ifaddrs_iterate.h"
-#include <cy/experiment/coroutine/simple_generator.h>
+#include <cy/coroutine/simple_generator.h>
 #include <ifaddrs.h>
 namespace cy::network {
-cy::experiment::coroutine::Simple_generator<ifaddrs *> iterate_interface() {
+cy::coroutine::Simple_generator<ifaddrs *> iterate_interface() {
   struct ifaddrs *ifap;
   if (getifaddrs(&ifap) == -1) {
     // std::cerr << "Error getting network interface information." << std::endl;
