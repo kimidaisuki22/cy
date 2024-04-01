@@ -18,7 +18,7 @@ std::string format_time_with_format_string(const char *fmt,
 }
 } // namespace
 std::string cy::text::local_date_str() {
-  return format_time_with_format_string("%Y-%m-%e", 32);
+  return format_time_with_format_string("%Y-%m-%d", 32);
 }
 std::string cy::text::local_hour_minute_seconds_str() {
   return format_time_with_format_string("%H:%M:%S", 12);
