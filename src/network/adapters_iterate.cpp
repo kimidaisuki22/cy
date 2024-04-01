@@ -3,10 +3,10 @@
 #include <vector>
 #ifdef _WIN32
 #include "detail_include/adapters_iterate.h"
-#include <cy/experiment/coroutine/simple_generator.h>
+#include <cy/coroutine/simple_generator.h>
 
 namespace cy::network {
-cy::experiment::coroutine::Simple_generator<PIP_ADAPTER_ADDRESSES>
+cy::coroutine::Simple_generator<PIP_ADAPTER_ADDRESSES>
 iterate_interface() {
 
   // Initialize Winsock
