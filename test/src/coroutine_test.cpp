@@ -41,10 +41,10 @@ f_task(cy::coroutine::Scheduler_pack &schedulers, int index, int &output,
     memset(ch.data(), 0, ch.size());
   }
 
-  int time = co_await f_sleep(schedulers, index / 10);
+  // int time = co_await f_sleep(schedulers, index / 10);
 
   co_await schedulers.await_main();
-  std::cout << "Done " << index << " for " << time << " seconds\n";
+  // std::cout << "Done " << index << " for " << time << " seconds\n";
   output += 1;
   count_down--;
   co_return 0;

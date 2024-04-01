@@ -33,6 +33,13 @@ src/shell/shell.cpp
 
 src/network/ip_inx.cpp
 src/network/ip_win32.cpp
+src/network/get_interface_inx.cpp
+src/network/get_interface_win32.cpp
+src/network/sockaddr_to_string_inx.cpp
+src/network/sockaddr_to_string_win32.cpp
+src/network/find_ip.cpp
+src/network/ifaddrs_iterate.cpp
+src/network/adapters_iterate.cpp
 
 src/io/read_to_buffer.cpp
 src/io/write_from_buffer.cpp
@@ -64,6 +71,10 @@ endif()
 target_include_directories(cy PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+if(WIN32)
+    target_link_libraries(cy PRIVATE ntdll)
+endif()
 
 
 option(cy_BUILD_EXAMPLE "build example for cy" ON)
