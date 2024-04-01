@@ -1,3 +1,4 @@
+#ifndef _WIN32
 #include "detail_include/ifaddrs_iterate.h"
 #include <cy/experiment/coroutine/simple_generator.h>
 #include <ifaddrs.h>
@@ -19,3 +20,4 @@ cy::experiment::coroutine::Simple_generator<ifaddrs *> iterate_interface() {
   co_return;
 }
 } // namespace cy::network
+#endif
