@@ -19,6 +19,7 @@ src/fs/iterate_dir.cpp
 
 src/proc/memory.cpp
 src/proc/env.cpp
+src/proc/work_dir.cpp
 
 src/text/process.cpp
 src/text/to_str.cpp
