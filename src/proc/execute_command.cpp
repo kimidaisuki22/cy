@@ -5,6 +5,7 @@
 
 #include <cstdio>
 #include <string>
+#include "inner-include/os.h"
 namespace {
 class Tiny_buffer {
 public:
@@ -45,6 +46,9 @@ const auto pclose = _pclose;
 #endif
 
 void exec(std::string command) {
+  #if CY_TARGET_IOS
+  #warning "iOS exec is not supported"
+  #else
      std::system(
       #if defined(_WIN32)
       ("start " + command).c_str()
@@ -52,6 +56,7 @@ void exec(std::string command) {
       (command + " &").c_str()
       #endif
      );
+  #endif
 }
 
 } // namespace

@@ -73,6 +73,8 @@ target_include_directories(cy PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
+target_include_directories(cy PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inner-include>)
 if(WIN32)
     target_link_libraries(cy PRIVATE ntdll)
 endif()
